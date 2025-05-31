@@ -12,6 +12,7 @@ import {
 const allowed = [
     "index.js",
     "package.backup.json",
+    ".gitignore.backup",
     "README.md",
     "dev-refresh.js",
     ".git",
@@ -38,3 +39,8 @@ for (let file of files) {
 
 const packageBackup = readFile("package.backup.json");
 writeFile("package.json", packageBackup);
+
+const gitignoreBackup = readFile(".gitignore.backup");
+writeFile(".gitignore", gitignoreBackup);
+
+
