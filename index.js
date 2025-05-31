@@ -114,24 +114,26 @@ writeFile(".env", "");
 
 process.on("exit", () => {
   console.log("[CREATE-DUMPSTERFIRE-APP]: Deleting cloned folder...");
-  setTimeout(() => {
-    try {
-      deleteFolder(cloneDir);
-      console.log("[CREATE-DUMPSTERFIRE-APP]: Cloned folder deleted!");
-    } catch (e) {
-      console.log(e);
-    } finally {
-      logEnding();
-    }
-  }, 500);
+  try {
+    deleteFolder(cloneDir);
+    console.log("[CREATE-DUMPSTERFIRE-APP]: Cloned folder deleted!");
+  } catch (e) {
+    console.log(e);
+  } finally {
+    logEnding();
+  }
 });
 
 const logEnding = () => {
-  console.log("----- FINISHED CREATING THE PROJECT FILES -----");
-  console.log("-----------------------------------------------");
-  console.log("----- Do as follows to build your new project: -----");
+  console.log("-------- FINISHED CREATING PROJECT FILES -------");
+  console.log("------------------------------------------------");
+  console.log("--- Do as follows to build your new project: ---");
   console.log("1.\tdocker-compose up --build -d");
-  console.log("2.\tGet into the Docker shell");
-  console.log("3.\tRun composer install && npm build:all");
-  console.log("-----------------------------------------------");
+  console.log("2.\tGet into the Docker shell (docker exec -it <image name> sh");
+  console.log("3.\tRun composer install && npm install && npm build:all");
+  console.log(
+    "4.\tIf Tailwind build fails, run npm install tailwindcss, then\n\t\trun npm build:all again."
+  );
+  console.log("5.\tReach site at localhost:8080");
+  console.log("------------------------------------------------");
 };
