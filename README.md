@@ -1,4 +1,8 @@
+# create-dumpsterfire-app
+
 NPX command fetches a Dumpsterfire project template from [here](https://github.com/cheerios4316/poteriforti) and initializes a new Dumspterfire project.
+
+Check out the [NPM package](https://www.npmjs.com/package/create-dumpsterfire-app)
 
 ### Usage
 
