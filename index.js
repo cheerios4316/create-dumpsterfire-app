@@ -120,8 +120,9 @@ process.on("exit", () => {
       console.log("[CREATE-DUMPSTERFIRE-APP]: Cloned folder deleted!");
     } catch (e) {
       console.log(e);
+    } finally {
+      logEnding();
     }
-    logEnding();
   }, 500);
 });
 
