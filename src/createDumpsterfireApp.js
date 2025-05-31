@@ -13,7 +13,7 @@ import {
 } from "./utils.js";
 
 const createDumpsterfireApp = () => {
-    console.log("[CREATE-DUMPSTERFIRE-APP\] Setting up...");
+    console.log("[CREATE-DUMPSTERFIRE-APP] Setting up...");
 
     const repoUrl = "https://github.com/cheerios4316/poteriforti.git";
 
@@ -27,25 +27,23 @@ const createDumpsterfireApp = () => {
 
     if (itemExists(cloneDir)) {
         deleteFolder(cloneDir);
-        console.log("[CREATE-DUMPSTERFIRE-APP\] Deleted old cloned folder");
+        console.log("[CREATE-DUMPSTERFIRE-APP] Deleted old cloned folder");
     }
 
     if (itemExists("package.json")) {
         currentPackageJson = { ...JSON.parse(readFile("package.json")) };
         console.log(
-            "[CREATE-DUMPSTERFIRE-APP\] Backed up old package.json file"
+            "[CREATE-DUMPSTERFIRE-APP] Backed up old package.json file"
         );
     }
 
-    console.log(
-        "[CREATE-DUMPSTERFIRE-APP\] Cloning Dumpsterfire repository..."
-    );
+    console.log("[CREATE-DUMPSTERFIRE-APP] Cloning Dumpsterfire repository...");
     cloneRepo(repoUrl, cloneDir);
-    console.log("[CREATE-DUMPSTERFIRE-APP\] Repository successfully cloned");
+    console.log("[CREATE-DUMPSTERFIRE-APP] Repository successfully cloned");
 
     const files = getFolderFiles(cloneDir);
 
-    console.log("[CREATE-DUMPSTERFIRE-APP\] Copying files...");
+    console.log("[CREATE-DUMPSTERFIRE-APP] Copying files...");
     for (const file of files) {
         if (isDirectory(getPath(cloneDir, file))) {
             if (unwantedFolders.includes(file)) {
@@ -68,16 +66,16 @@ const createDumpsterfireApp = () => {
         }
         moveHere(cloneDir, file);
     }
-    console.log("[CREATE-DUMPSTERFIRE-APP\] Files successfully copied");
+    console.log("[CREATE-DUMPSTERFIRE-APP] Files successfully copied");
 
     let resultJson = {};
 
-    console.log("[CREATE-DUMPSTERFIRE-APP\] Building new package.json file...");
+    console.log("[CREATE-DUMPSTERFIRE-APP] Building new package.json file...");
 
     if (currentPackageJson) {
         writeFile("package.json.old", JSON.stringify(currentPackageJson));
         console.log(
-            "[CREATE-DUMPSTERFIRE-APP\] Saved old package.json in package.json.old"
+            "[CREATE-DUMPSTERFIRE-APP] Saved old package.json in package.json.old"
         );
 
         resultJson = {
@@ -112,40 +110,41 @@ const createDumpsterfireApp = () => {
     writeFile("package.json", JSON.stringify(resultJson));
 
     console.log(
-        "[CREATE-DUMPSTERFIRE-APP\] New package.json successfully built."
+        "[CREATE-DUMPSTERFIRE-APP] New package.json successfully built."
     );
 
     writeFile(".env", "");
 
     process.on("exit", () => {
-        console.log("[CREATE-DUMPSTERFIRE-APP\] Deleting cloned folder...");
+        console.log("[CREATE-DUMPSTERFIRE-APP] Deleting cloned folder...");
         try {
             deleteFolder(cloneDir);
-            console.log("[CREATE-DUMPSTERFIRE-APP\] Cloned folder deleted!");
+            console.log("[CREATE-DUMPSTERFIRE-APP] Cloned folder deleted!");
         } catch (e) {
             console.log(
-                "[CREATE-DUMPSTERFIRE-APP\] Failed deleting temp-clone! Please delete manually."
+                "[CREATE-DUMPSTERFIRE-APP] Failed deleting temp-clone! Please delete manually."
             );
         } finally {
             logEnding();
         }
     });
-
-    const logEnding = () => {
-        console.log("-------- FINISHED CREATING PROJECT FILES -------");
-        console.log("------------------------------------------------");
-        console.log("--- Do as follows to build your new project: ---");
-        console.log("1.\tdocker-compose up --build -d");
-        console.log(
-            "2.\tGet into the Docker shell (docker exec -it <image name> sh"
-        );
-        console.log("3.\tRun 'npm run project:setup'");
-        console.log(
-            "4.\tIf Tailwind build fails, run 'npm install tailwindcss', then\n\trun 'npm run build:all'."
-        );
-        console.log("5.\tReach site at localhost:8080");
-        console.log("------------------------------------------------");
-    };
 };
 
-export { createDumpsterfireApp };
+const logEnding = () => {
+    console.log("-------- FINISHED CREATING PROJECT FILES -------");
+    console.log("------------------------------------------------");
+    console.log("--- Do as follows to build your new project: ---");
+    console.log("1.\tdocker-compose up --build -d");
+    console.log(
+        "\n2.\tGet into the Docker shell (docker exec -it <image name> sh"
+    );
+    console.log("\n3.\tRun 'npm run project:setup'");
+    console.log(
+        "\n4.\tIf Tailwind build fails, run 'npm install tailwindcss', then\n\trun 'npm run build:all'."
+    );
+    console.log("\n5.\tReach site at localhost:8080");
+    console.log("\n6.\tIf you created this project without the --blank flag,\n\tyou can remove the example code with\n\t'npx create-dumpsterfire-app --purge'")
+    console.log("------------------------------------------------");
+};
+
+export { createDumpsterfireApp, logEnding };

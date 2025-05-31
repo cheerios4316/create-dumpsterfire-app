@@ -2,6 +2,7 @@ import { deleteFolder, itemExists, copyContent } from "./utils.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import rl from "readline";
+import { createDumpsterfireApp, logEnding } from "./createDumpsterfireApp.js";
 
 const readline = rl.createInterface({
     input: process.stdin,
@@ -16,6 +17,8 @@ const handleAction = async (action) => {
         case "--purge":
             await actionPurge();
             break;
+        case "--blank":
+            actionBlank();
     }
 };
 
@@ -62,6 +65,12 @@ const actualPurge = () => {
 
     deleteFolder(templatePath);
 };
+
+const actionBlank = () => {
+    createDumpsterfireApp();
+    actualPurge();
+    logEnding();
+}
 
 const replaceFiles = (templatePath) => {
     copyContent(templatePath, ".");
