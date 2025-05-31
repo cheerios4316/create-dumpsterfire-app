@@ -16,7 +16,8 @@ const allowed = [
     "dev-refresh.js",
     ".git",
     "src",
-    "template"
+    "template",
+    ".prettierrc"
 ];
 
 const files = getFolderFiles(".");
