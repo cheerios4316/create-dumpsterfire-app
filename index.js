@@ -23,7 +23,7 @@ const cloneDir = "temp-clone";
 let gitPackageJson = {};
 let currentPackageJson = undefined;
 
-const unwantedFiles = ['package.json']
+const unwantedFiles = ['package.json', 'README.md']
 const unwantedFolders = ['.git']
 
 if (itemExists(cloneDir)) {
@@ -49,7 +49,7 @@ for (const file of files) {
 
             deleteFile(getPath(cloneDir, file));
 
-            if(update.fieldToUpdate) {
+            if(update?.fieldToUpdate) {
                 switch(update.fieldToUpdate) {
                     case 'gitPackageJson':
                         gitPackageJson = update.data;
@@ -82,7 +82,8 @@ if(currentPackageJson) {
 } else {
     resultJson = {
         ...gitPackageJson,
-        name: 'Your Dumpsterfire App'
+        name: 'Your Dumpsterfire App',
+        author: '<your name>'
     }
 }
 
