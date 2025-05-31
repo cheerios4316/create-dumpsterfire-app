@@ -3,7 +3,7 @@ NPX command fetches a Dumpsterfire project template from [here](https://github.c
 ### Usage
 
 `npx create-dumpsterfire-app` \
-Creates a Dumpsterfire project with an example page with a lot of information and many example components.
+Creates a Dumpsterfire project with an example page containing lots of information and many example components.
 
 `npx create-dumpsterfire-app --purge` \
 Removes the example page from the project and leaves a barebones setup only (basic app instance with one route).
