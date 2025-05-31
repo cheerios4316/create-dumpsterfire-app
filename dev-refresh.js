@@ -17,7 +17,8 @@ const allowed = [
     ".git",
     "src",
     "template",
-    ".prettierrc"
+    ".prettierrc",
+    ".gitignore"
 ];
 
 const files = getFolderFiles(".");
