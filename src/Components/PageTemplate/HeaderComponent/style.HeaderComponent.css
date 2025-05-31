@@ -1,0 +1,17 @@
+.moving {
+    animation: shake .1s infinite linear;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateY(-.7rem);
+    }
+
+    50% {
+        transform: translateY(.5rem);
+    }
+
+    100% {
+        transform: translateY(.7rem);
+    }
+}
