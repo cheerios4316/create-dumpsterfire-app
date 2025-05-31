@@ -1,0 +1,11 @@
+{
+  "name": "create-dumpsterfire-app",
+  "version": "1.0.0",
+  "description": "Script to initialize a new Dumpsterfire project+",
+  "author": "cheerios4316",
+  "license": "ISC",
+  "bin": {
+    "create-dumpsterfire-app": "index.js"
+  },
+  "type": "module"
+}
