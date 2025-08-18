@@ -82,7 +82,7 @@ const replaceFiles = (templatePath) => {
 };
 
 const actionComponent = (...args) => {
-
+    dumpsterfireGenerator.component(...args);
 };
 
 const actionController = (...args) => {

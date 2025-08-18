@@ -75,7 +75,7 @@ const generateComponent = (...args) => {
 
     writeFile(
         `${destDir}/style.${name}.css`,
-        replaceContentName(templates.style, name)
+        replaceContentName(templates.style, htmlName, true)
     );
 }
 
