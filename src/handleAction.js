@@ -7,7 +7,7 @@ import { dumpsterfireGenerator } from "./generator.js";
 
 const readline = rl.createInterface({
     input: process.stdin,
-    output: process.stdout,
+    output: process.stdout
 });
 
 const question = (query) =>
@@ -20,10 +20,13 @@ const handleAction = async (action, ...args) => {
             break;
         case "--blank":
             actionBlank();
+            break;
         case "--component":
             actionComponent(...args);
+            break;
         case "--controller":
             actionController(...args);
+            break;
     }
 };
 
@@ -46,9 +49,9 @@ const actionPurge = async () => {
     );
     console.log("\t\t\t./index.php ./tailwind/init.css");
     const res = await question(
-        '[CREATE-DUMPSTERFIRE-APP] Are you sure you want to continue? Enter the following: "' +
-            expectedRes +
-            '" -> '
+        "[CREATE-DUMPSTERFIRE-APP] Are you sure you want to continue? Enter the following: \"" +
+        expectedRes +
+        "\" -> "
     );
 
     readline.close();
@@ -75,18 +78,32 @@ const actionBlank = () => {
     createDumpsterfireApp();
     actualPurge();
     logEnding();
-}
+};
 
 const replaceFiles = (templatePath) => {
     copyContent(templatePath, ".");
 };
 
 const actionComponent = (...args) => {
-    dumpsterfireGenerator.component(...args);
+    try {
+        console.log("[CREATE-DUMPSTERFIRE-APP] Starting creation of component...")
+        dumpsterfireGenerator.component(...args);
+        console.log("[CREATE-DUMPSTERFIRE-APP] Created component " + args[0]);
+    } catch (e) {
+        console.log("[CREATE-DUMPSTERFIRE-APP] Creation of component failed.");
+        throw e;
+    }
 };
 
 const actionController = (...args) => {
-    dumpsterfireGenerator.controller(...args);
-}
+    try {
+        console.log("[CREATE-DUMPSTERFIRE-APP] Starting creation of controller...")
+        dumpsterfireGenerator.controller(...args);
+        console.log("[CREATE-DUMPSTERFIRE-APP] Created controller " + args[0]);
+    } catch (e) {
+        console.log("[CREATE-DUMPSTERFIRE-APP] Creation of controller failed.");
+        throw e;
+    }
+};
 
 export { handleAction };

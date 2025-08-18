@@ -2,6 +2,7 @@ import { createFolder, isDirectory, itemExists, pascalToKebab, readFile, writeFi
 
 const common = (name, type) => {
     if(!["controller", "component"].includes(type)) {
+        console.log("[CREATE-DUMPSTERFIRE-APP] Unable to locate location for " + type)
         return false;
     }
 
