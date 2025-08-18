@@ -18,7 +18,7 @@ const common = (name, type) => {
     }
 
     return {
-        sourceDir: `./dumpsterfire-template/${type}`,
+        sourceDir: `./.dumpsterfire-template/${type}`,
         destDir: destDir
     };
 }
