@@ -1,4 +1,4 @@
-import { createFolder, isDirectory, pascalToKebab, readFile, writeFile } from "./utils.js";
+import { createFolder, isDirectory, itemExists, pascalToKebab, readFile, writeFile } from "./utils.js";
 
 const common = (name, type) => {
     if(!["controller", "component"].includes(type)) {
@@ -13,7 +13,7 @@ const common = (name, type) => {
     let destDir = `${basePath}`;
     destDir = isController ? destDir : `${destDir}/${name}`;
 
-    if(!isDirectory(destDir)) {
+    if(!itemExists(destDir)) {
         createFolder(destDir);
     }
 
