@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import rl from "readline";
 import { createDumpsterfireApp, logEnding } from "./createDumpsterfireApp.js";
+import { dumpsterfireGenerator } from "./generator.js";
 
 const readline = rl.createInterface({
     input: process.stdin,
@@ -12,20 +13,24 @@ const readline = rl.createInterface({
 const question = (query) =>
     new Promise((resolve) => readline.question(query, resolve));
 
-const handleAction = async (action) => {
+const handleAction = async (action, ...args) => {
     switch (action) {
         case "--purge":
             await actionPurge();
             break;
         case "--blank":
             actionBlank();
+        case "--component":
+            actionComponent(...args);
+        case "--controller":
+            actionController(...args);
     }
 };
 
 const actionPurge = async () => {
     const expectedRes = "yes.";
 
-    if (!itemExists(".dumpsterfire-template")) {
+    if (!itemExists(".dumpsterfire-blank-template")) {
         console.log(
             "[CREATE-DUMPSTERFIRE-APP] This project's example was already purged. Exiting..."
         );
@@ -58,7 +63,7 @@ const actionPurge = async () => {
 const actualPurge = () => {
     const foldersToDelete = ["./src/Components", "./src/Controllers"];
 
-    const templatePath = "./.dumpsterfire-template";
+    const templatePath = "./.dumpsterfire-blank-template";
 
     foldersToDelete.map((elem) => deleteFolder(elem));
     replaceFiles(templatePath);
@@ -75,5 +80,13 @@ const actionBlank = () => {
 const replaceFiles = (templatePath) => {
     copyContent(templatePath, ".");
 };
+
+const actionComponent = (...args) => {
+
+};
+
+const actionController = (...args) => {
+    dumpsterfireGenerator.controller(...args);
+}
 
 export { handleAction };

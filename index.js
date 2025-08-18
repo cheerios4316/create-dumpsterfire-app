@@ -12,8 +12,8 @@ switch (args.length) {
         createDumpsterfireApp();
         logEnding();
         break;
-    case 1:
-        await handleAction(args[0]);
+    default:
+        await handleAction(...args);
         break;
 }
 

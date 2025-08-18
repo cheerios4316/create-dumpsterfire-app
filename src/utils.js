@@ -23,6 +23,10 @@ const cloneRepo = (url, dir) => {
     deleteFolder(getPath(dir, ".git"));
 };
 
+const createFolder = (dir) => {
+    fs.mkdirSync(dir, {recursive: true});
+}
+
 const getFolderFiles = (folder) => fs.readdirSync(folder);
 
 const itemExists = (folder) => fs.existsSync(folder);
@@ -50,6 +54,8 @@ const handleUnwantedFile = (file, repoDir) => {
     }
 };
 
+const pascalToKebab = str => str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+
 export {
     moveHere,
     deleteFolder,
@@ -63,4 +69,6 @@ export {
     writeFile,
     handleUnwantedFile,
     copyContent,
+    createFolder,
+    pascalToKebab
 };
